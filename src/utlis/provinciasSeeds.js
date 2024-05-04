@@ -3,11 +3,8 @@ const provincias = require('../data/seeds/provinciasSeeds')
 const mongoose = require('mongoose')
 
 const lanzarProvincias = async () => {
-  /* mongodb+srv://inigocanta:ugIpcnvbrR0Y3wzD@cluster0.lqdqrhd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0 */
   try {
-    await mongoose.connect(
-      'mongodb+srv://inigocanta:ugIpcnvbrR0Y3wzD@cluster0.lqdqrhd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
-    )
+    await mongoose.connect()
 
     await Provincia.collection.drop()
     console.log('Provincias eliminadas')
