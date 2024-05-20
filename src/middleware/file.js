@@ -5,7 +5,15 @@ const { CloudinaryStorage } = require('multer-storage-cloudinary')
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
-    folder: 'CentrosInterpretacion',
+    folder: (req) => {
+      if (req.body.nombre) {
+        return 'CentrosInterpretacion/users'
+      } else if (req.body.CCAA) {
+        return 'CentrosInterpretacion/provincias'
+      } else {
+        return 'CentrosInterpretacion/centros'
+      }
+    },
     allowedFormats: ['jpg', 'png', 'jpeg', 'gif']
   }
 })
