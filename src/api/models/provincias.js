@@ -4,7 +4,11 @@ const provinciaSchema = new mongoose.Schema(
   {
     Nombre: { type: String, required: true, unique: true, trim: true },
     CCAA: { type: String, required: true, unique: true, trim: true },
-    img: { type: String, required: true }
+    img: { type: String, required: true },
+    folder: {
+      type: String,
+      required: false
+    }
   },
   {
     timestamps: true,

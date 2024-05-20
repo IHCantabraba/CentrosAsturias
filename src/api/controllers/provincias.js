@@ -20,7 +20,7 @@ const postProvincia = async (req, res, next) => {
     const savedProvincia = await newProvincia.save()
     return res
       .status(200)
-      .json(`Successfully create new Centrp: ${savedProvincia}`)
+      .json(`Successfully create new Provincia: ${savedProvincia}`)
   } catch (error) {
     return res
       .status(400)

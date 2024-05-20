@@ -6,12 +6,12 @@ const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
     folder: (req) => {
-      if (req.body.nombre) {
-        return 'CentrosInterpretacion/users'
-      } else if (req.body.CCAA) {
-        return 'CentrosInterpretacion/provincias'
+      if (req.folder) {
+        return req.folder
       } else {
-        return 'CentrosInterpretacion/centros'
+        let baseUrl = req.baseUrl.split('/').at(-1)
+        console.log(`Base urlis: ${baseUrl}`)
+        return `Centrosinterpretacion/${baseUrl}`
       }
     },
     allowedFormats: ['jpg', 'png', 'jpeg', 'gif']

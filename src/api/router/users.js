@@ -6,13 +6,13 @@ const {
   updateUser,
   register,
   login
-} = require('../controllers/Users')
+} = require('../controllers/users')
 
 const usersRouter = require('express').Router()
 usersRouter.get('/', [isAdmin], getUsers)
 usersRouter.post('/register', upload.single('img'), register)
 usersRouter.post('/login', login)
-usersRouter.put('/:id', [isAuth], updateUser)
+usersRouter.post('/:id', [isAuth], upload.single('img'), updateUser)
 usersRouter.delete('/:id', [isAuth], deleteUser)
 
 module.exports = usersRouter

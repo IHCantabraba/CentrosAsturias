@@ -7,7 +7,16 @@ const userSchema = new mongoose.Schema(
     password: { type: String, required: true },
     nacimiento: { type: Number, required: true },
     img: { type: String, required: true },
-    rol: { type: String, enum: ['admin', 'user'], required: true }
+    rol: {
+      type: String,
+      enum: ['admin', 'user'],
+      required: false,
+      default: 'user'
+    },
+    folder: {
+      type: String,
+      required: false
+    }
   },
   {
     timestamps: true,

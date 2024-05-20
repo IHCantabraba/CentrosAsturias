@@ -2,6 +2,7 @@ const User = require('../models/users')
 const { deleteFile } = require('../../utlis/deleteFile')
 const bcrypt = require('bcrypt')
 const { generateToken } = require('../../utlis/token')
+const upload = require('../../middleware/file')
 const getUsers = async (req, res, next) => {
   try {
     const users = await User.find()
@@ -71,13 +72,23 @@ const updateUser = async (req, res, next) => {
   try {
     const { id } = req.params
     const newUser = new User(req.body)
+    const existingUser = await User.findById(id)
+    console.log(`current img is: ${existingUser.img}`)
+    if (req.file) {
+      console.log('changing img')
+      deleteFile(existingUser.img)
+    }
+    newUser.img = req.file.path
+    console.log(`updated user igm is: ${newUser.img}`)
+    newUser.rol = existingUser.rol
     newUser._id = id
+
     const UserUpdated = await User.findByIdAndUpdate(id, newUser, {
       new: true
     })
-    return res.status(200).json(`Successfully updated User: ${newUser} `)
+    return res.status(200).json(`Successfully updated User: ${UserUpdated} `)
   } catch (error) {
-    return res.status(400).json(`Error ocurred while updatting User: ${error}`)
+    return res.status(400).json(`Error ocurred while updating User: ${error}`)
   }
 }
 const deleteUser = async (req, res, next) => {
