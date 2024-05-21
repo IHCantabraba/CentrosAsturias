@@ -10,8 +10,8 @@ const storage = new CloudinaryStorage({
         return req.folder
       } else {
         let baseUrl = req.baseUrl.split('/').at(-1)
-        console.log(`Base urlis: ${baseUrl}`)
-        return `Centrosinterpretacion/${baseUrl}`
+        console.log(`BaseUrl is: ${baseUrl}`)
+        return `CentrosInterpretacion/${baseUrl}`
       }
     },
     allowedFormats: ['jpg', 'png', 'jpeg', 'gif']

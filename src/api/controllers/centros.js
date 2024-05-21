@@ -28,11 +28,23 @@ const updateCentro = async (req, res, next) => {
   try {
     const { id } = req.params
     const newCentro = new Centro(req.body)
+    const existingCentro = await Centro.findById(id)
+    console.log(`current img is: ${existingCentro.img}`)
+
+    if (req.file) {
+      console.log('changing img')
+      deleteFile(existingCentro.img)
+    }
+    newCentro.img = req.file.path
+    console.log(`updated user igm is: ${newCentro.img}`)
+
     newCentro._id = id
     const centroUpdated = await Centro.findByIdAndUpdate(id, newCentro, {
       new: true
     })
-    return res.status(200).json(`Successfully updated centro: ${newCentro} `)
+    return res
+      .status(200)
+      .json(`Successfully updated centro: ${centroUpdated} `)
   } catch (error) {
     return res
       .status(400)
