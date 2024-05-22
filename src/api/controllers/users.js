@@ -11,18 +11,7 @@ const getUsers = async (req, res, next) => {
     return res.status(400).json(`Error ocurred while getting Users: ${error}`)
   }
 }
-// const postUser = async (req, res, next) => {
-//   try {
-//     const newUser = new User(req.body)
-//     if (req.file) {
-//       newUser.img = req.file.path
-//     }
-//     const savedUser = await newUser.save()
-//     return res.status(200).json(`Successfully create new Centrp: ${savedUser}`)
-//   } catch (error) {
-//     return res.status(400).json(`Error ocurred while posting User: ${error}`)
-//   }
-// }
+
 const register = async (req, res, next) => {
   try {
     const user = new User({
