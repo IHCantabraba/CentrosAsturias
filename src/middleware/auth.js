@@ -22,6 +22,7 @@ const isAuth = async (req, res, next) => {
   try {
     const token = req.headers.authorization?.replace('Bearer ', '')
     const { id } = verifyToken(token)
+	
     next()
   } catch (error) {
     return res.status(401).json('Unauthoraized')

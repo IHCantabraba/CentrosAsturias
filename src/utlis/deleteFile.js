@@ -1,15 +1,19 @@
 const cloudinary = require('cloudinary').v2
+const buildUrl = require('cloudinary-build-url')
 
 const deleteFile = (imgUrl) => {
   try {
-    let imgPath = ''
-    const array = imgUrl.split('/')
-    const file = array.at(-1).split('.')[0]
-    const folder = array.at(-2)
-    imgPath += `${folder}/${file}`
+    const publicId = buildUrl.extractPublicId(imgUrl)
 
-    cloudinary.uploader.destroy(`${folder}/${file}`)
-  } catch (error) {}
+    console.log(`url to delete :${publicId}`)
+    cloudinary.uploader.destroy(publicId, function (error, result) {
+      console.log(result, error)
+    })
+  } catch (error) {
+    console.log(
+      `Error occurred trying to delete image ` /*${folder}/${subfolder}/${path} */
+    )
+  }
 }
 
 module.exports = { deleteFile }

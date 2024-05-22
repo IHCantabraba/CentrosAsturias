@@ -4,13 +4,13 @@ const {
   postProvincia,
   deleteProvincia,
   updateProvincia
-} = require('../controllers/Provincias')
+} = require('../controllers/provincias')
 
 const provinciasRouter = require('express').Router()
 
 provinciasRouter.get('/', getProvincias)
 provinciasRouter.post('/', upload.single('img'), postProvincia)
-provinciasRouter.put('/:id', updateProvincia)
+provinciasRouter.post('/:id', upload.single('img'), updateProvincia)
 provinciasRouter.delete('/:id', deleteProvincia)
 
 module.exports = provinciasRouter

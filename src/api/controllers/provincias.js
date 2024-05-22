@@ -20,7 +20,7 @@ const postProvincia = async (req, res, next) => {
     const savedProvincia = await newProvincia.save()
     return res
       .status(200)
-      .json(`Successfully create new Centrp: ${savedProvincia}`)
+      .json(`Successfully create new Provincia: ${savedProvincia}`)
   } catch (error) {
     return res
       .status(400)
@@ -32,6 +32,14 @@ const updateProvincia = async (req, res, next) => {
   try {
     const { id } = req.params
     const newProvincia = new Provincia(req.body)
+    const existingProvincia = await Provincia.findById(id)
+
+    if (req.file) {
+      console.log('changing img')
+      deleteFile(existingProvincia.img)
+    }
+    newProvincia.img = req.file.path
+    console.log(`updated user igm is: ${newProvincia.img}`)
     newProvincia._id = id
     const ProvinciaUpdated = await Provincia.findByIdAndUpdate(
       id,

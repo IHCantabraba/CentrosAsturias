@@ -9,7 +9,11 @@ const centroSchema = new mongoose.Schema({
   email: { type: String, reuqired: false },
   provincia: { type: mongoose.Types.ObjectId, ref: 'provincias' },
   horarioM: { type: String, required: true },
-  horarioT: { type: String, required: true }
+  horarioT: { type: String, required: true },
+  folder: {
+    type: String,
+    required: false
+  }
 })
 
 const Centro = mongoose.model('centros', centroSchema, 'centros')
